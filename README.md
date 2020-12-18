@@ -3,7 +3,9 @@
 Developing the webshop for Craft Coffee to sell artisanal coffee, toppings and accessories to hip coffee fans from 18 to 50 years of age in central Europe.
 
 __Technologies:__ XAMPP, Symfony framework, TWIG templating engine and Bootstrap design system
+
 __Additional Tools:__ Trello, draw.io, Affinity Photo, Adobe Stock
+
 __Timeframe:__ 7.12. - 17.12.2020
 
 ## Project Details
@@ -19,7 +21,15 @@ Clone the repository and import the DB export from the directory `db-export` int
 
 Run `composer install` (an additional `composer update` might be necessary).
 
-To launch the webshop run `php bin/console server:run`
+To launch the webshop run `php bin/console server:run` and then follow the instructions in the terminal.
+
+### User Accounts
+You can register a new user or use the following existing user accounts:
+
+- `user@gmail.com` for a regular user
+- `jennifer.lopez@gmail.com` for an admin user.
+
+Both user accounts have the password `123123`
 
 ## Screenshots of Finished Shop
 ![The Craft Coffee Webshop](documentation/screenshots/screenshot1.png)
