@@ -9,7 +9,7 @@ __Timeframe:__ 7.12. - 17.12.2020
 ## Project Details
 This is the final project for the backend/fullstack course at CodeFactory (CF11). The objective of this project is to develop an online store where customers can browse the product catalog and select the desired products. The selected items will be collected in a shopping cart. At checkout the items from the shopping cart will be displayed and the customer can pay the order. An email notification will be sent to the customer when the order is completed.
 
-Please find the __project presentation__ here: documentation/craft-coffee-project-17-dec-2020.pdf
+Please find the __project presentation__ here: https://github.com/mbalabanov/craftcoffee/blob/main/documentation/craft-coffee-project-17-dec-2020.pdf
 
 Please find the __Trello project plan__ here: https://trello.com/b/Et9sWbhm/craft-coffee-shop
 
