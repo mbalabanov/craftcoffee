@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+                {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3 my-5">
+                <h2>Please register</h2>
+                <a href="{{ path('product_index') }}" class="btn btn-warning">Back to Products</a>
+
+                <div class="my-4">
+                    {{ form_start(registrationForm) }}
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <h3>Your Data</h3>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                {{ form_row(registrationForm.enabled, {label: 'You are registering as a customer.', 'checked': 'checked', 'attr': {'class': 'visually-hidden'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.firstname, {label: 'First Name','attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.lastname, {label: 'Last Name','attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.plainPassword, {label: 'Password', 'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.image, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.payment_type, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <h3>Address</h3>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                {{ form_row(registrationForm.streetaddress, {label: 'Street Address (Street Name and Door Numbers)','attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.postalcode, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.city, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.country, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.agreeTerms, {label: 'Agree to terms', 'attr': {'class': 'mx-2'}}) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning my-2">Register</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+
+<div class="form-group">
+    <div class="row my-2">
+        <div class="col-md-12">
+            {{ form_label(form.commentText) }}
+            {{ form_widget(form.commentText, {'attr': {'class': 'form-control'}}) }}
+            <small>{{ form_help(form.commentText) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.commentText) }}
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-warning my-2">{{ button_label|default('Post Comment') }}</button>
+
+{{ form_end(form) }}

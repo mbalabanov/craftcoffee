@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="animate__animated animate__backInLeft">Shopping Cart</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            {% if products_in_cart %}
+                <table class="table border">
+                    <thead>
+                        <tr class="table-warning">
+                            <th colspan="3">Item</th>
+                            <th class="text-center">Category</th>
+                            <th class="text-end">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+
+                        {% for item in products_in_cart %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('product_show', {'productId': item.product.productId}) }}"><img src="{{ item.product.image }}" height="80px" class="rounded"></a>
+                                </td>
+                                <td>
+                                  <a href="{{ path('product_show', {'productId': item.product.productId}) }}" class="text-decoration-none text-secondary">{{ item.product.name }}</a>
+                                </td>
+                                <td>
+                                  <a href="{{ path('ordered_product_delete' ,{'orderedProductId': item.orderedProductId}) }}" class="btn btn-danger btn-sm">Remove Item</a>
+                                </td>
+                                <td class="text-center">
+                                    {{ item.product.category }}
+                                </td>
+                                {% if item.product.discountedPrice %}
+                                    <td class="text-end">
+                                        € {{ item.product.discountedPrice|number_format(2) }}
+                                        <br/><span class="badge bg-danger">Discounted</span>
+                                    </td>
+                                {% else %}
+                                    <td class="text-end">
+                                        € {{ item.product.price|number_format(2) }}
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+
+                        <tr class="table-secondary">
+                            <td colspan="4" class="text-end">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="text-end">
+                                <strong>€ {{ currentshoppingcart.totalPrice|number_format(2) }}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-secondary" role="alert">
+                    There are no products in your shopping cart.
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-warning">
+                {% if products_in_cart %}
+                    <a class="btn btn-primary btn-lg my-2 animate__animated animate__heartBeat" href="/submitted/order">Checkout &#8594</a>
+                {% endif %}
+                <h3>Your User Data</h3>
+                <p><strong>Name:</strong> {{ app.user.firstname }} {{ app.user.lastname }} (ID {{ app.user.userId }})</p>
+                <p><strong>Email:</strong> {{ app.user.email }}</p>
+                <p><strong>Address:</strong><br/>
+                    {{ app.user.streetaddress }}<br/>
+                    {{ app.user.postalcode }} {{ app.user.city }}<br/>
+                    {{ app.user.country }}
+                </p>
+                <p><strong>Payment Type:</strong> {{ app.user.paymentType }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

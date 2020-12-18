@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Craft Coffee Special Offers{% endblock %}
+
+{% block body %}
+
+<div id="specialofferscarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        {% for special_offer in special_offers %}
+            <li data-bs-target="#specialofferscarousel" data-bs-slide-to="{{ loop.index }}" {% if loop.index == 1 %} class="active" {% endif %}></li>
+        {% endfor %}
+    </ol>
+    <div class="carousel-inner">
+        {% for special_offer in special_offers %}
+        <div class="carousel-item {% if loop.index == 1 %} active {% endif %}"  data-bs-interval="5000">
+            <a href="/product/{{ special_offer.product.productId }}"><img src="{{ special_offer.image }}" class="d-block w-100" alt="{{ special_offer.name }}"></a>
+            <div class="carousel-caption d-none d-md-block">
+                <h2>{{ special_offer.name }}</h2>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <span class="badge bg-primary">Only visible to Admin</span><br/>
+                    <a href="{{ special_offer.specialOfferId }}/edit" class="btn btn-light m-1">Edit Offer</a><a href="{{ special_offer.specialOfferId }}" class="btn btn-light m-1">Offer Details</a><a href="{{ path('special_offers_new') }}" class="btn btn-warning m-1">Create New Offer</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#specialofferscarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#specialofferscarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+
+<div class="container my-4">
+        <div class="row mb-3">
+            <div class="col-md-12 text-center">
+                <h2>Welcome to Craft Coffee.</h2>
+                <p>
+                    We offer fine <strong>coffee</strong> blends, delicious <strong>toppings</strong> and useful <strong>accessories</strong> for lovers of really good coffee.<br>
+                    By carefully selecting and hand-roasting the very best organic, Fair Trade Certified, single-origin coffees in the world, we've been able to establish an unparalleled reputation in the international coffee scene.</p>
+                    <a href="/product" class="btn btn-warning">See all products</a>
+                </p>
+                <h2>Today's Specials</h2>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2">
+
+            {% for product in products %}
+                    <div class="col mb-4 text-center">
+                        <div class="card">
+                            <div class="card-header">{{ product.category }}</div>
+                                <div class="card-body text-center p-5">
+                                    <a href="{{ path('product_show', {'productId': product.productId}) }}"><img src="{{ product.image }}" class="card-img-top img-fluid rounded" alt="{{ product.name }}"></a>
+                                    <h3 class="card-title"><a href="{{ path('product_show', {'productId': product.productId}) }}" class="text-decoration-none text-secondary">{{ product.name }}</a></h3>
+
+                                    {% if not product.discountedPrice %}
+                                        <p><strong>Price: € {{ product.price|number_format(2) }}</strong></p>
+                                    {% endif %}
+
+                                    {% if product.discountedPrice %}
+                                        <div class="alert alert-warning">
+                                            <del>Normal Price: € {{ product.price|number_format(2) }}</del><br/>
+                                            <strong>Discounted Price: € {{ product.discountedPrice|number_format(2) }}</strong>
+                                        </div>
+                                    {% endif %}
+
+                                    <p>{{ product.description }}</p>
+                                    <p><small>{{ product.quantityOnStock }} in stock</small></p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a class="btn btn-warning" href="{{ path('product_show', {'productId': product.productId}) }}">Details</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="{{ path('product_edit', {'productId': product.productId}) }} "><button type="button" class="btn btn-secondary">Edit</button></a>
+                                    {% endif %}
+                                    {% if app.user %}
+                                        <a class="btn btn-primary" href="{{ path('product_buy', {'productId': product.productId}) }}">Buy</a>
+                                    {% endif %}
+
+                                    {% if not app.user %}
+                                        <p class="small">Interested in this item?<br>Please <a href="/login">login</a> or <a href="/register">register</a> to buy.</p> 
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+            {% else %}
+                <h4> No Products Found</h4>     
+            {% endfor %}
+
+        </div>
+</div>
+{% endblock %}

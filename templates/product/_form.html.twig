@@ -1,0 +1,102 @@
+
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(form) }}
+
+    <div class="form-group">
+        <div class="row my-2">
+            <div class="col-md-12">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                <small>{{ form_help(form.name) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.name) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row my-2">
+            <div class="col-md-12">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                <small>{{ form_help(form.image) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.image) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row my-2">
+            <div class="col-md-12">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                <small>{{ form_help(form.description) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.description) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row my-2">
+            <div class="col-md-6">
+                {{ form_label(form.price) }}
+                {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                <small>{{ form_help(form.price) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.price) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.discountedPrice) }}
+                {{ form_widget(form.discountedPrice, {'attr': {'class': 'form-control'}}) }}
+                <small>{{ form_help(form.discountedPrice) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.discountedPrice) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row my-2">
+            <div class="col-md-6">
+                {{ form_label(form.category) }}
+                {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                <small>{{ form_help(form.category) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.category) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.quantityOnStock) }}
+                {{ form_widget(form.quantityOnStock, {'attr': {'class': 'form-control'}}) }}
+                <small>{{ form_help(form.quantityOnStock) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.quantityOnStock) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row my-2">
+            <div class="col-md-12">
+                {{ form_label(form.enabled) }}
+                {{ form_widget(form.enabled, {'attr': {'class': 'form-check-input'}}) }}
+                <small>{{ form_help(form.enabled) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.enabled) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-warning my-2">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
+{% endblock %}

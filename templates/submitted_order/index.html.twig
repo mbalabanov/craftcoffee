@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Summary{% endblock %}
+
+{% block body %}
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+
+      <h2 class="text-center mb-4">Order Summary</h2>
+
+      <table class="table border">
+          <thead>
+              <tr class="table-warning">
+                  <th width="10%">Item</th>
+                  <th></th>
+                  <th class="text-center">Category</th>
+                  <th class="text-center">Price</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for item in products_in_cart %}
+            <tr>
+              <td><img src="{{ item.product.image}}" width="60px" class="rounded"></td>
+              <td>{{ item.product.name}}</td>
+              <td class="text-center">{{ item.product.category}}</td>
+              {% if item.product.discountedPrice %}
+                <td class="text-center">€ {{ item.product.discountedPrice|number_format(2)}}</td>
+              {% else %}
+                <td class="text-center">€ {{ item.product.price|number_format(2)}}</td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+            <tr class="table-light">
+              <td class="text-muted text-end" colspan="3">Price without VAT.</td>
+              <td class="text-muted text-center">€ {{ currentshoppingcart.totalPrice|number_format(2)*0.85 }}</td>
+            </tr>
+            <tr class="table-light">
+              <td class="text-muted text-end" colspan="3">VAT.</td>
+              <td class="text-muted text-center">€ {{ currentshoppingcart.totalPrice|number_format(2)*0.15 }}</td>
+            <tr class="table-secondary">
+              <th colspan="3" class="text-end">Total</td>
+              <th class="text-center">€ {{ currentshoppingcart.totalPrice|number_format(2) }}</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">  
+    <div class="col-md-6 text-start">
+      <a class="btn btn-primary btn-lg my-2" href="/product">&#8592 Continue Shopping</a>
+    </div>
+    <div class="col-md-6 text-end">
+      <a class="btn btn-primary btn-lg my-2 m-auto" href="/payment">Go to Payment &#8594</a>
+    </div>
+  </div>
+
+  <div class="row">  
+    <div class="col-md-12">
+      <img src="/assets/img/coffee/coffees.jpg" class="img-fluid" alt="Our finest coffee">
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

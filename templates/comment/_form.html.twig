@@ -1,0 +1,28 @@
+{{ form_start(form) }}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h3>Write a Comment about '{{ productname.name }}'</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="form-group">
+                <div class="row my-2">
+                    <div class="col-md-12">
+                        {{ form_label(form.commentText) }}
+                        {{ form_widget(form.commentText, {'attr': {'class': 'form-control'}}) }}
+                        <small>{{ form_help(form.commentText) }}</small>
+                        <div class="form-error">
+                            {{ form_errors(form.commentText) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-warning my-2">{{ button_label|default('Post Comment') }}</button>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}

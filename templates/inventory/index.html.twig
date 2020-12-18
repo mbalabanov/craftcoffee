@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="row my-2">
+        <div class="col-md-12 p-3"> 
+            <h2>Product Inventory</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-3">
+            <h3 class="text-danger">Products Running Low</h3>
+                <div class="row">
+                    {% for product in products %}
+                        {% if product.quantityOnStock < 11 %}
+                            <div class="col-md-4">
+                                <div class="alert alert-danger text-center">
+                                    <p><span class="badge bg-danger">Replenish Stock Now</span></p>
+                                    <h3>{{ product.name }}</h3>
+                                    <h4>{{ product.quantityOnStock }}</h4>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-md-12 p-4"> 
+            <h3>Total Inventory</h3>
+        </div>
+    </div>
+
+    <div class="row border border-secondary rounded p-2 mb-5 bg-light">
+        <div class="col-md-12 p-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col" class="text-center">Category</th>
+                        <th scope="col" class="text-center">Price</th>
+                        <th scope="col" class="text-center">Discounted<br>Price</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td scope="col">{{ product.productId }}</td>
+                            <td scope="col"><a href="{{ path('product_show', {'productId': product.productId}) }}"><img src="{{ product.image }}" alt="{{ product.name }}" height="60px" class="border rounded"></a></td>
+                            <td scope="col">
+                                <a href="{{ path('product_show', {'productId': product.productId}) }}" class="text-decoration-none text-secondary">{{ product.name }}</a>                    
+                                {% if product.quantityOnStock <= 10  %}
+                                    <br><span class="badge bg-danger">Replenish Stock Now</span>
+                                {% endif %}
+                                {% if product.quantityOnStock > 10 and product.quantityOnStock < 21  %}
+                                    <br><span class="badge bg-warning">Replenish Stock Soon</span>
+                                {% endif %}
+                            
+                            </td>
+                            <td scope="col" class="text-center">{{ product.category }}</td>
+                            <td scope="col" class="text-center">€ {{ product.price|number_format(2) }}</td>
+                            <td scope="col" class="text-center">
+                                {% if product.discountedPrice == 0 %}
+                                    &#10006;
+                                {% else %}
+                                    € {{ product.discountedPrice|number_format(2) }}
+                                {% endif %}
+                            </td>
+                            {% if product.quantityOnStock <= 10  %}
+                                <td scope="col" class="text-center table-danger">
+                                    <strong class="fs-5">{{ product.quantityOnStock }}</strong><br>
+                                    <span class="badge bg-danger">Replenish Stock Now</span>
+                                </td>
+                            {% elseif product.quantityOnStock > 10 and product.quantityOnStock < 21 %}
+                                <td scope="col" class="text-center table-warning">
+                                    <strong class="fs-5">{{ product.quantityOnStock }}</strong><br>
+                                    <span class="badge bg-warning">Replenish Stock Soon</span>
+                                </td>
+                            {% else %}
+                                <td scope="col" class="text-center">{{ product.quantityOnStock }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SpecialOffers{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row my-4">
+            <div class="col-md-8 offset-3">
+                <h3>Create New Special Offer</h3>
+                <a href="{{ path('special_offers_index') }}" class="btn btn-warning">Back To Special Offers</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 offset-3">
+                {{ include('special_offers/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

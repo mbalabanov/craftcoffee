@@ -1,0 +1,8 @@
+{% block body %}
+    {{ form_start(searchform) }}
+        <div class="form-group input-group mb-3">
+            {{ form_widget(searchform.searchterm, {'attr': {'class': 'form-control'}}) }}
+            <input type="submit" value="Search Products" class="btn btn-warning"/>
+        </div>
+    {{ form_end(searchform) }}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block body %}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Contact Us</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="alert alert-secondary" role="alert">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Craft Coffee GmbH</strong><br/>
+                        Wissmannstraße 6<br/>
+                        40219 Düsseldorf<br/><br/>
+
+                        <strong>Tel:</strong> 0123 / 01234 01234<br>
+                        <strong>Email:</strong> <a href="mailto:info@craftcoffee.com">info@craftcoffee.com</a>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/assets/img/craft-coffee-logo1.png" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <h3>Send us a Message</h3>
+            {{ form_start(contactform) }}
+            <div class="form-group">
+                <div class="row my-2">
+                    <div class="col-md-12">
+                        {{ form_label(contactform.name) }}
+                        {{ form_widget(contactform.name, {'attr': {'class': 'form-control'}}) }}
+                        <small>{{ form_help(contactform.name) }}</small>
+                        <div class="form-error">
+                            {{ form_errors(contactform.name) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row my-2">
+                    <div class="col-md-12">
+                        {{ form_label(contactform.email) }}
+                        {{ form_widget(contactform.email, {'attr': {'class': 'form-control'}}) }}
+                        <small>{{ form_help(contactform.email) }}</small>
+                        <div class="form-error">
+                            {{ form_errors(contactform.email) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row my-2">
+                    <div class="col-md-12">
+                        {{ form_label(contactform.message) }}
+                        {{ form_widget(contactform.message, {'attr': {'class': 'form-control'}}) }}
+                        <small>{{ form_help(contactform.message) }}</small>
+                        <div class="form-error">
+                            {{ form_errors(contactform.message) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Send" class="btn btn-warning"/>
+            {{ form_end(contactform) }}
+        </div>
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-12">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2810.6450209129857!2d6.766937664785022!3d51.21172784816901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8ca6b6d175fc1%3A0xc746568ac3cd72ec!2sCaf%C3%A9%20Modigliani!5e1!3m2!1sde!2sbg!4v1607976140986!5m2!1sde!2sbg" width="100%" height="500" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

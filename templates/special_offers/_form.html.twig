@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <div class="row my-2">
+        <div class="col-md-12">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            <small>{{ form_help(form.name) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-12">
+            {{ form_label(form.image) }}
+            {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+            <small>{{ form_help(form.image) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.image) }}
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-12">
+            {{ form_label(form.product) }}
+            {{ form_widget(form.product, {'attr': {'class': 'form-control'}}) }}
+            <small>{{ form_help(form.product) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.product) }}
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-warning my-2">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

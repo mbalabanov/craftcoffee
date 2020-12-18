@@ -1,0 +1,78 @@
+{% block navigation %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-warning ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img src="/assets/img/craft-coffee-logo1.png" alt="Craft Coffee" height="100px" class="mx-4"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/product">All Products</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="categoriesNavBar" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Product Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="categoriesNavBar">
+            <li><a class="dropdown-item" href="/product/filter/Coffee">Coffee</a></li>
+            <li><a class="dropdown-item" href="/product/filter/Accessories">Accessories</a></li>
+            <li><a class="dropdown-item" href="/product/filter/Toppings">Toppings</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+      </ul>
+
+      {% if not app.user %}
+        <a href="/login" class="btn btn-light m-2">Login</a>
+        <a href="/register" class="btn btn-light m-2">Register</a>
+      {% endif %}
+
+      {% if app.user %}
+        <div class="dropdown mx-1">
+          <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ app.user.image }}" width="20px"> {{ app.user.email }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="/profile/user/{{ app.user.userId }}/edit">User Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+
+        {% if app.user %}
+          {% if app.user.enabled == 0 %}
+            <a href="#" class="btn btn-danger">This user is not enabled</a>
+          {% endif %}
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+          <div class="dropdown mx-1">
+            <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="/admin/adminpanel">Admin Panel</a></li>
+              <li><a class="dropdown-item" href="/admin/salesstats">Sales Statistics</a></li>
+              <li><a class="dropdown-item" href="/admin/inventory">Product Inventory</a></li>
+            </ul>
+          </div>
+        {% endif %}
+        <a href="/shoppingcart" class="btn btn-primary m-1">
+          Shopping Cart 
+            {% if currentshoppingcart %}
+              (€ {{ currentshoppingcart.totalPrice }})
+            {% endif %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+
+{% block body %}
+<div class="container my-5">
+    <div class="row py-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="alert alert-danger text-center p-5 m-5" role="alert">
+                <h3>Remove Item</h3>
+                <form method="post" action="{{ path('ordered_product_delete', {'orderedProductId': ordered_product.orderedProductId}) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ordered_product.orderedProductId) }}">
+                    <p class="my-5">Do you really want to remove this item?</p>
+                    <button class="btn btn-danger">Yes, remove</button>
+                    <a href="/shoppingcart" class="btn btn-primary">No, return to shopping list</a>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

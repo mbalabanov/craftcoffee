@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SpecialOffers{% endblock %}
+
+{% block body %}
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Special Offer: "{{ special_offer.name }}"</h2>
+                <a href="{{ path('special_offers_index') }}" class="btn btn-warning my-2">Back To Special Offers</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ special_offer.image }}" alt="{{ special_offer.name }}" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-warning" role="alert">
+                    <h5>ID {{ special_offer.specialOfferId }}</h5>
+                    <h5>Name</h5>
+                    <p>{{ special_offer.name }}</p>
+                    <h5>Related Product</h5>
+                    <p>{{ special_offer.product.name }} (ID {{ special_offer.product.productId }})</p>
+                    <h5>Assigned Image</h5>
+                    <p>{{ special_offer.image }}</p>
+                    <a href="{{ path('special_offers_edit', {'specialOfferId': special_offer.specialOfferId}) }}" class="btn btn-warning m-2">Edit</a>
+                    {{ include('special_offers/_delete_form.html.twig') }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

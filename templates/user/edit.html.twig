@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block body %}
+
+{% if user == currentuser or is_granted('ROLE_ADMIN') %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <p><img src="{{ user.image }}" alt="{{ user.firstname }} {{ user.lastname }}" class="img-fluid"></p>
+            <h4>{{ user.firstname }} {{ user.lastname }}</h4>
+            <p>{{ user.email }}</p>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="/admin/adminpanel" class="btn btn-warning my-2">Back to Admin Panel</a><br/>
+            {% endif %}
+            <a href="{{ path('product_index') }}" class="btn btn-warning">Back to Products</a><br>
+        </div>
+        <div class="col-md-9">
+            <h2>
+                User Profile
+                {% if is_granted('ROLE_ADMIN') %}
+                    <span class="text-danger">&nbsp;(Editing as Admin)</span>
+                {% endif %}
+            </h2>
+
+            {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+
+            <div class="alert alert-danger my-5" role="alert">
+                <h4>Revoke Your User</h4>
+                <p>You want to close your user account and delete your user data? We respect that.</p>
+                <p>Please click on the button below. Kindly be advised that this will delete your user data and you will no longer be able to login.</p>
+                <a href="#" class="btn btn-danger btn-lg">Revoke User</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% else %}
+
+<div class="alert alert-danger m-5 text-center" role="alert">
+    You are trying to access the wrong user account.
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ShoppingCart{% endblock %}
+
+{% block body %}
+    <h1>ShoppingCart</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ShoppingCartId</th>
+                <td>{{ shopping_cart.shoppingCartId }}</td>
+            </tr>
+            <tr>
+                <th>TotalPrice</th>
+                <td>{{ shopping_cart.totalPrice }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ shopping_cart.date ? shopping_cart.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ shopping_cart.status }}</td>
+            </tr>
+            <tr>
+                <th>UserId</th>
+                <td>{{ shopping_cart.userId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('shopping_cart_index') }}">back to list</a>
+
+    <a href="{{ path('shopping_cart_edit', {'shoppingCartId': shopping_cart.shoppingCartId}) }}">edit</a>
+
+    {{ include('shopping_cart/_delete_form.html.twig') }}
+{% endblock %}

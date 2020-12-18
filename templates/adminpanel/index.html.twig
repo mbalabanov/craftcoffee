@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+    <div class="container my-4">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h2>Admin Panel</h2>
+            </div>
+        </div>
+        <div class="row mb-4 border border-primary rounded p-4 my-4 bg-light">
+            <div class="col-md-12">
+                <h3>User List</h3>
+                <a href="/register" class="btn btn-sm btn-warning">Register New User</a>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Enabled</th>
+                                <th scope="col">Role</th>
+                                <th scope="col" class="text-center" colspan="3">Functions</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Payment Type</th>
+                                <th scope="col">Country</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.userId }}</td>
+                                    <td class="text-center">
+                                        {% if user.enabled == 1 %}
+                                            &#10004;
+                                        {% else %}
+                                            &#10006;
+                                        {% endif %}
+                                    </td>
+                                    <td><strong class="small">{{ user.roles[0] }}</strong></td>
+                                    <td class="text-center">
+                                        <a href="/admin/setadmin/{{user.userId}}" class="btn btn-sm btn-warning m-1">&#8594Admin</a><br/>
+                                        <a href="/admin/setstandard/{{user.userId}}" class="btn btn-sm btn-warning m-1">&#8594User</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/admin/setdisabled/{{user.userId}}" class="btn btn-sm btn-warning m-1">&#8594Disable</a><br/>
+                                        <a href="/admin/setenabled/{{user.userId}}" class="btn btn-sm btn-warning m-1">&#8594Enable</a>
+                                    </td>
+                                    <td><a href="/profile/user/{{user.userId}}/edit" class="btn btn-sm btn-warning m-1">Edit</a></td>
+                                    <td>{{ user.firstname }}</td>
+                                    <td>{{ user.lastname }}</td>
+                                    <td><img src="{{ user.image }}" width="40px"></td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.paymentType }}</td>
+                                    <td>{{ user.country }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-md-12 border border-warning rounded p-4 my-4 bg-light">
+                <h3>Product List</h3>
+                <a href="/product/new" class="btn btn-sm btn-warning">Add New Product</a>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col text-center">ID</th>
+                                <th scope="col text-center">Enabled</th>
+                                <th scope="col text-center">Functions</th>
+                                <th scope="col text-center">Name</th>
+                                <th scope="col text-center">Image</th>
+                                <th scope="col text-center">Description</th>
+                                <th scope="col text-end">Price</th>
+                                <th scope="col text-end">Disc. Price</th>
+                                <th scope="col text-center">Category</th>
+                                <th scope="col text-center">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                                <tr>
+                                    <td class="text-center">{{ product.productId }}</td>
+                                    <td class="text-center">
+                                        {% if product.enabled == 1 %}
+                                            &#10004;
+                                        {% else %}
+                                            &#10006;
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/product/{{ product.productId }}/edit" class="btn btn-sm btn-warning m-1">Edit</a><br/>
+                                        <a href="/admin/disableproduct/{{ product.productId }}" class="btn btn-sm btn-warning m-1">&#8594Disable</a><br/>
+                                        <a href="/admin/enableproduct/{{ product.productId }}" class="btn btn-sm btn-warning m-1">&#8594Enable</a>
+                                    </td>
+
+                                    <td>{{ product.name }}</td>
+                                    <td><img src="{{ product.image }}" class="border rounded" width="60px" class="border rounded"></td>
+                                    <td>{{ product.description }}</td>
+                                    <td class="text-end">€{{ product.price|number_format(2) }}</td>
+                                    <td class="text-end">€{{ product.discountedPrice|number_format(2) }}</td>
+                                    <td class="text-center">{{ product.category }}</td>
+                                    <td class="text-center">{{ product.quantityOnStock }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

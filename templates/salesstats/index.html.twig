@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sales Statistics{% endblock %}
+
+{% block body %}
+
+<div class="container my-4">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Sales Statistics</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border bg-light rounded">
+                    <h4 class="m-4 text-center">Sales Chart</h4>
+                    <div class="table-responsive">
+                    <table class="table">
+                    
+                        <tr style="vertical-align:bottom">
+                            {% for orderedproduct in orderedproducts %}
+                                <td style="vertical-align:bottom; width:120px" class="text-center">
+                                    {% for key,item in orderedproduct %}
+                                        {% if key is odd %}
+                                            <button class="btn btn-primary px-3" style="height:{{ item }}em"><span class="small">{{ item }}</button><br><strong>{{ item }}</strong> sold<br>  
+                                        {% else %}
+                                            <strong>prd.{{ item }}</strong></span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border bg-light p-4 my-4 rounded">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center">Product List</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Image</th>
+                        <th>Name</th>
+                        <th class="text-center">Category</th>
+                        <th class="text-center">Quantity on Stock</th>
+                        <th class="text-center">Product Link</th>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td class="text-center">{{ product.productId }}</td>
+                            <td class="text-center"><img src="{{ product.image }}" width="40px" class="rounded"></td>
+                            <td>{{ product.name }}</td>
+                            <td class="text-center">{{ product.category }}</td>
+                            <td class="text-center">{{ product.quantityOnStock }}</td>
+                            <td class="text-center"><a href="/product/{{ product.productId }}" class="btn btn-warning btn-sm">Product details</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
