@@ -8,7 +8,7 @@ __Additional Tools:__ Trello, draw.io, Affinity Photo, Adobe Stock
 
 __Timeframe:__ 7.12. - 17.12.2020
 
-__Development Team:__ Marin Balabanov and Zusanna Stichova at the CodeFactory Backend Web Developer course. This is a clone of the internal CodeFactory project repository.
+__Development Team:__ [Marin Balabanov](https://github.com/mbalabanov) and [Zuzana Stichova](https://github.com/ZuzanaStichova) at the [Codefactory](https://codefactory.wien) Backend Web Developer course. This is a clone of the internal CodeFactory project repository.
 
 ## Project Details
 This is the final project for the backend/fullstack course at CodeFactory (CF11). The objective of this project is to develop an online store where customers can browse the product catalog and select the desired products. The selected items will be collected in a shopping cart. At checkout the items from the shopping cart will be displayed and the customer can pay the order. An email notification will be sent to the customer when the order is completed.
